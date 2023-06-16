@@ -1,0 +1,38 @@
+create database bcpw;
+use bcpw;
+create table clientes(
+	id int not null auto_increment,
+    nome varchar(100) not null,
+    idade smallint null,
+    cpf bigint not null unique,
+    primary key(id)
+);
+
+create table funcionarios(
+	id int not null auto_increment,
+    nome varchar(100) not null,
+    idade smallint null,
+    cpf bigint not null unique,
+    primary key(id)
+);
+
+create table produtos(
+	id int not null auto_increment,
+    nome varchar(100) not null,
+    quantidade int not null,
+    valor numeric(9,2) not null,
+    primary key(id)
+);
+
+create table vendas(
+	id int not null auto_increment,
+    idCliente int not null,
+    idFuncionario int not null,
+    idProduto int not null,
+    diaVenda date,
+    quantidade bigint not null,
+    primary key(id),
+    constraint fk_vendas_clientes foreign key(idCliente) references clientes(id),
+    constraint fk_vendas_funcionarios foreign key(idFuncionario) references funcionarios(id),
+    constraint fk_vendas_produtos foreign key(idProduto) references produtos(id)
+);
